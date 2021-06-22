@@ -1,12 +1,12 @@
 import React from 'react';
-import {Link, BrowserRouter as Router, Switch,Route} from "react-router-dom";
 import Home from './Homef';
 import About from './Aboutf';
 import Contacted from './Contactf';
+import {Link, BrowserRouter as Router, Switch,Route, useRouteMatch} from "react-router-dom";
 
 
 
-export default function Routee()
+export default function NestedRou()
 {
     return(
         <Router>
@@ -18,6 +18,10 @@ export default function Routee()
 
                 <li>
                 <Link to="/about">About</Link>
+                </li>
+
+                <li>
+                <Link to="/membership">MemberShip</Link>
                 </li>
                 <li>
                 <Link to="/contact">Contact</Link>
@@ -45,6 +49,10 @@ export default function Routee()
 
                 </Route>
 
+                <Route path="/membership">
+                <Membership></Membership>
+                </Route>
+
                 <Route path="/*">
 
                 <Errorr></Errorr>
@@ -52,15 +60,6 @@ export default function Routee()
                 </Route>
                     
                 </Switch>
-
-
-
-
-
-
-
-
-
         </div>
         </Router>
     )
@@ -75,3 +74,31 @@ function Errorr()
 }
 
 
+function Membership()
+{
+    let {url} = useRouteMatch();
+    return(
+        <Router>
+        <div>
+            <ul>
+                <li>
+                <Link to={`${url}/platinum`}>Platinum</Link>
+                </li>
+
+                <li>
+                <Link to={`${url}/gold`}>Gold</Link>
+                </li>
+
+                <li>
+                <Link to={`${url}/silver`}>Silver</Link>
+                </li>
+                
+            </ul>
+
+        </div>
+
+       
+        </Router>
+
+    )
+}
